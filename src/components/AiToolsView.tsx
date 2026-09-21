@@ -39,7 +39,7 @@ export const AiToolsView: React.FC<AiToolsViewProps> = ({
     subjectB: '{{first_name}}, quick benchmark on {{company}}\'s sender reputation',
     body: `<p>Hi {{first_name}},</p>
 <p>Most engineering leaders scaling outbound infrastructure hit a wall when Google & Outlook begin silently junking messages due to single-node throttling.</p>
-<p>We built SMTPDock to dynamically distribute outbound relays across Amazon SES, Postmark, and custom nodes based on real-time bounce signals.</p>
+<p>We built SMTPHUB to dynamically distribute outbound relays across Amazon SES, Postmark, and custom nodes based on real-time bounce signals.</p>
 <p>Would you be opposed to reviewing our 1-page architecture benchmark?</p>
 <p>Best regards,<br>Sarah</p>`,
     openEst: '58.4%',

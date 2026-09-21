@@ -140,7 +140,7 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
     name: 'Weekly Tech Digest #48 - DKIM & DMARC 2026 Rules',
     subject: '⚡ Major updates to Gmail & Yahoo bulk sending policies',
     previewText: 'Strict DMARC enforcement starts next month: here is your audit checklist',
-    fromName: 'SMTPDock Intelligence',
+    fromName: 'SMTPHUB Intelligence',
     fromEmail: 'digest@mail.cloudreach.io',
     smtpAccountId: 'smtp-3',
     recipientCount: 22400,
@@ -296,13 +296,13 @@ export const INITIAL_TEMPLATES: EmailTemplate[] = [
     tags: ['Product', 'Launch', 'Feature'],
     lastUpdated: 'Sep 15, 2026',
     htmlContent: `<h2>Big Update for {{first_name}}! 🎉</h2>
-<p>We are excited to unveil <strong>SMTPDock v2.4</strong>.</p>
+<p>We are excited to unveil <strong>SMTPHUB v2.4</strong>.</p>
 <ul>
   <li>🔥 <strong>Automated IP Warmup:</strong> Step from 50 to 15,000 emails/day without touching DNS.</li>
   <li>🛡️ <strong>Live RBL & Blacklist Watchdog:</strong> Instant alert before your domain gets flagged.</li>
   <li>⚡ <strong>Zero Latency Relay:</strong> Average 64ms handshake across all nodes.</li>
 </ul>
-<p><a href="https://smtpdock.com" style="background:#10b981;color:#fff;padding:12px 24px;border-radius:8px;font-weight:bold;text-decoration:none;display:inline-block;">Access Your New Dashboard &rarr;</a></p>`,
+<p><a href="https://smtphub.com" style="background:#10b981;color:#fff;padding:12px 24px;border-radius:8px;font-weight:bold;text-decoration:none;display:inline-block;">Access Your New Dashboard &rarr;</a></p>`,
   },
   {
     id: 'tpl-3',
@@ -324,11 +324,11 @@ export const INITIAL_TEMPLATES: EmailTemplate[] = [
     id: 'tpl-4',
     name: 'Customer Onboarding - Welcome Guide',
     category: 'Onboarding',
-    subject: 'Welcome to SMTPDock, {{first_name}}! Let\'s link your first SMTP',
+    subject: 'Welcome to SMTPHUB, {{first_name}}! Let\'s link your first SMTP',
     previewText: '3 simple steps to start dispatching clean bulk mail',
     tags: ['Onboarding', 'Welcome', 'Setup'],
     lastUpdated: 'Sep 10, 2026',
-    htmlContent: `<h2>Welcome to the Dock, {{first_name}} ⚓</h2>
+    htmlContent: `<h2>Welcome to the Hub, {{first_name}} 🚀</h2>
 <p>You have taken the first step toward bulletproof email deliverability for {{company}}.</p>
 <p>Here is how to get your first test batch running in under 2 minutes:</p>
 <ol>
@@ -541,7 +541,7 @@ export const INITIAL_SEQUENCES: Sequence[] = [
       {
         id: 'st-201',
         dayOffset: 0,
-        subject: 'Welcome to SMTPDock! Verify your SPF & DKIM keys',
+        subject: 'Welcome to SMTPHUB! Verify your SPF & DKIM keys',
         previewText: 'Your 2-minute checklist to unlock 50k free sends',
         sentCount: 1420,
         openRate: 72.8,

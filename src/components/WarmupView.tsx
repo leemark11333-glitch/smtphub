@@ -215,7 +215,7 @@ export const WarmupView: React.FC<WarmupViewProps> = ({ warmup, onToggleWarmup }
             <h3 className="text-sm font-bold text-white">Simulated Engagement Protocol</h3>
           </div>
           <p className="text-xs text-slate-400">
-            Peers in the SMTPDock Warmup Network open, star, mark important, and reply with custom conversation threads.
+            Peers in the SMTPHUB Warmup Network open, star, mark important, and reply with custom conversation threads.
           </p>
 
           <div className="space-y-2.5 text-xs">

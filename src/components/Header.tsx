@@ -89,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({
       case 'guides':
         return 'Documentation & RFC Protocols';
       default:
-        return 'SMTPDock';
+        return 'SMTPHUB';
     }
   };
 
@@ -109,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-emerald-400 tracking-wider uppercase font-mono">
-              SMTPDock &bull; Relay Engine
+              SMTPHUB &bull; Relay Engine
             </span>
             <span className="text-white/20">/</span>
             <h1 className="text-sm md:text-base font-bold text-slate-100">{getPageTitle(activeNav)}</h1>
@@ -274,7 +274,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 font-mono truncate">
-                  {currentUser?.email || 'admin@smtpdock.com'}
+                  {currentUser?.email || 'admin@smtphub.com'}
                 </p>
 
                 {validity && (

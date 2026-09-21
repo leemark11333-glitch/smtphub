@@ -142,7 +142,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     if (validity.isExpired) {
       setLoginError({
         title: 'Login Validity Expired',
-        message: `Your granted access of ${user.accessDays} day(s) expired on ${validity.expiryDateFormatted}. Contact Master Admin (admin@smtpdock.com) to renew your access in days.`,
+        message: `Your granted access of ${user.accessDays} day(s) expired on ${validity.expiryDateFormatted}. Contact Master Admin (${MASTER_ADMIN_EMAIL}) to renew your access in days.`,
         type: 'expired',
       });
       return;
@@ -240,7 +240,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <Radio className="w-6 h-6 stroke-[2.5]" />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <h2 className="text-xl font-extrabold text-white tracking-tight">SMTPDock Access Portal</h2>
+            <h2 className="text-xl font-extrabold text-white tracking-tight">SMTPHUB Access Portal</h2>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
               v2.4
             </span>
@@ -340,7 +340,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   type="email"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
-                  placeholder="admin@smtpdock.com or user@company.com"
+                  placeholder="admin@smtphub.com or user@company.com"
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/40 border border-white/[0.1] text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500/60 font-mono"
                   required
                 />
@@ -406,7 +406,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     Master Admin
                   </div>
                   <div className="text-[10px] font-mono text-slate-400 truncate">
-                    admin@smtpdock.com
+                    admin@smtphub.com
                   </div>
                   <div className="text-[9px] font-mono text-emerald-400/80 mt-0.5">
                     Pass: Killnom@9692

@@ -33,7 +33,7 @@ export const GuidesView: React.FC<GuidesViewProps> = ({ setActiveNav }) => {
       readTime: '6 min read',
       icon: Server,
       content:
-        'Distributing email bursts across Amazon SES, Postmark, and self-hosted VPS nodes prevents IP rate-limiting. When an ISP throttles one node, SMTPDock automatically reroutes queued outbound messages to your secondary relay within 20 milliseconds.',
+        'Distributing email bursts across Amazon SES, Postmark, and self-hosted VPS nodes prevents IP rate-limiting. When an ISP throttles one node, SMTPHUB automatically reroutes queued outbound messages to your secondary relay within 20 milliseconds.',
       action: 'Manage SMTP Cluster',
       nav: 'smtp' as ActiveNav,
     },

@@ -122,7 +122,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         <div className="p-3 border-t border-white/[0.06] bg-black/40 flex items-center justify-between text-[10px] font-mono text-slate-500">
           <span>Navigate with arrows or mouse</span>
-          <span>SMTPDock Command Protocol</span>
+          <span>SMTPHUB Command Protocol</span>
         </div>
       </div>
     </div>

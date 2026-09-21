@@ -53,8 +53,8 @@ export const SenderDomainsView: React.FC<SenderDomainsViewProps> = ({
       smtpProvider: 'Amazon SES / Postmark Dual',
       spf: {
         status: 'valid',
-        record: `v=spf1 include:amazonses.com include:smtpdock.com ~all`,
-        expected: `v=spf1 include:amazonses.com include:smtpdock.com ~all`,
+        record: `v=spf1 include:amazonses.com include:smtphub.com ~all`,
+        expected: `v=spf1 include:amazonses.com include:smtphub.com ~all`,
       },
       dkim: {
         status: 'valid',

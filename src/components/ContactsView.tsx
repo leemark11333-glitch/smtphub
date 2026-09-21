@@ -132,7 +132,7 @@ jordan.bell@apexsaas.co,Jordan,Bell,Apex SaaS`
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'smtpdock-contacts-export.csv';
+    a.download = 'smtphub-contacts-export.csv';
     a.click();
     URL.revokeObjectURL(url);
   };

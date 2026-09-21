@@ -1,11 +1,11 @@
 import { AppUser, AdminNotification } from '../types';
 
-export const MASTER_ADMIN_EMAIL = 'admin@smtpdock.com';
+export const MASTER_ADMIN_EMAIL = 'admin@smtphub.com';
 export const MASTER_ADMIN_PASSWORD = 'Killnom@9692';
 
-const USERS_STORAGE_KEY = 'smtpdock_users_v1';
-const CURRENT_USER_STORAGE_KEY = 'smtpdock_current_user_v1';
-const NOTIFICATIONS_STORAGE_KEY = 'smtpdock_admin_notifications_v1';
+const USERS_STORAGE_KEY = 'smtphub_users_v1';
+const CURRENT_USER_STORAGE_KEY = 'smtphub_current_user_v1';
+const NOTIFICATIONS_STORAGE_KEY = 'smtphub_admin_notifications_v1';
 
 // Seed Users with realistic dates and states
 export const INITIAL_USERS: AppUser[] = [
@@ -205,7 +205,7 @@ export function checkUserAccessValidity(user: AppUser): AccessValidityResult {
 // Storage helpers
 export function loadStoredUsers(): AppUser[] {
   try {
-    const stored = localStorage.getItem(USERS_STORAGE_KEY);
+    const stored = localStorage.getItem(USERS_STORAGE_KEY) || localStorage.getItem('smtpdock_users_v1');
     if (stored) {
       const parsed = JSON.parse(stored);
       if (Array.isArray(parsed) && parsed.length > 0) {

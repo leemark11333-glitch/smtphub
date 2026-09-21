@@ -66,7 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base tracking-tight text-white">SMTPDock</span>
+              <span className="font-extrabold text-base tracking-tight text-white">SMTPHUB</span>
               <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 tracking-wider font-mono">
                 PRO
               </span>

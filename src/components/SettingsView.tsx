@@ -13,9 +13,9 @@ import {
 } from 'lucide-react';
 
 export const SettingsView: React.FC = () => {
-  const [apiKey, setApiKey] = useState('smtpdock_live_sk_948f98a2b3491d9047b8e');
+  const [apiKey, setApiKey] = useState('smtphub_live_sk_948f98a2b3491d9047b8e');
   const [trackingDomain, setTrackingDomain] = useState('track.mail.cloudreach.io');
-  const [webhookUrl, setWebhookUrl] = useState('https://api.cloudreach.io/webhooks/smtpdock');
+  const [webhookUrl, setWebhookUrl] = useState('https://api.cloudreach.io/webhooks/smtphub');
   const [copiedKey, setCopiedKey] = useState(false);
   const [openTracking, setOpenTracking] = useState(true);
   const [clickTracking, setClickTracking] = useState(true);
@@ -96,7 +96,7 @@ export const SettingsView: React.FC = () => {
 
           <div>
             <label className="block text-xs font-semibold text-slate-300 mb-1">
-              Custom CNAME Domain (pointing to cname.smtpdock.com)
+              Custom CNAME Domain (pointing to cname.smtphub.com)
             </label>
             <input
               type="text"
