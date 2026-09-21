@@ -15,7 +15,8 @@ import {
   ArrowRight,
   Sparkles,
   HelpCircle,
-  ExternalLink
+  ExternalLink,
+  Gift
 } from 'lucide-react';
 import { AppUser, AdminNotification } from '../types';
 import {
@@ -32,6 +33,7 @@ interface AuthModalProps {
   onUserRegistered: (newUser: AppUser, notif: AdminNotification) => void;
   onRequestPasswordReset?: (email: string) => void;
   initialTab?: 'login' | 'signup';
+  isMandatory?: boolean;
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({
@@ -42,6 +44,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onUserRegistered,
   onRequestPasswordReset,
   initialTab = 'login',
+  isMandatory = false,
 }) => {
   const [tab, setTab] = useState<'login' | 'signup' | 'forgot'>(initialTab);
 
@@ -188,8 +191,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       role: 'user',
       status: 'pending',
       accessDays: 0,
+      creditBalance: 10,
       createdAt: new Date().toISOString(),
-      notes: 'New registration awaiting Master Admin approval and day allocation',
+      notes: 'New registration with $10 signup bonus credit. Awaiting Master Admin approval and day allocation',
     };
 
     const newNotification: AdminNotification = {
@@ -198,7 +202,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       userId: newUser.id,
       userName: newUser.name,
       userEmail: newUser.email,
-      message: `New registration request from ${newUser.name} (${newUser.email}). Review and allocate login days in Master Admin Panel.`,
+      message: `New registration request from ${newUser.name} (${newUser.email}) [$10 bonus credit assigned]. Review and allocate login days in Master Admin Panel.`,
       createdAt: new Date().toISOString(),
       read: false,
     };
@@ -225,7 +229,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-[#0e111a] border border-white/[0.12] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-6 animate-in fade-in zoom-in-95 relative my-8">
-        {onClose && (
+        {!isMandatory && onClose && (
           <button
             onClick={onClose}
             className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/[0.06] transition-colors cursor-pointer"
@@ -275,14 +279,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               setSignupError(null);
               setSignupSuccess(null);
             }}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               tab === 'signup'
                 ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
             <User className="w-3.5 h-3.5" />
-            <span>Request Account</span>
+            <span>Sign Up</span>
+            <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">
+              +$10
+            </span>
           </button>
           <button
             type="button"
@@ -477,12 +484,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <p className="text-xs text-slate-300 leading-relaxed">
                   Thank you, <strong className="text-emerald-400">{signupSuccess.name}</strong>! Your account request has been submitted. A real-time notification was delivered to the Master Admin Portal.
                 </p>
+
+                {/* $10 Bonus Credit Confirmation */}
+                <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2 text-emerald-300 font-bold">
+                    <Gift className="w-4 h-4 text-emerald-400" />
+                    <span>Welcome Bonus Credited:</span>
+                  </div>
+                  <span className="font-mono font-extrabold text-emerald-300 text-sm bg-black/40 px-2 py-0.5 rounded border border-emerald-500/30">
+                    +$10.00 Balance
+                  </span>
+                </div>
+
                 <div className="p-3 rounded-xl bg-black/40 border border-white/[0.08] text-left text-xs font-mono space-y-1 text-slate-300">
                   <div><span className="text-slate-500">Email:</span> {signupSuccess.email}</div>
                   <div><span className="text-slate-500">Status:</span> <span className="text-amber-400">Awaiting Admin Day Allocation</span></div>
+                  <div><span className="text-slate-500">Credit Balance:</span> <span className="text-emerald-400">$10.00 Available</span></div>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Once the Master Admin approves and sets your access validity in days, you can sign in directly using this same email and password.
+                  Once the Master Admin approves and sets your access validity in days, you can sign in directly using this same email and password. Your $10 bonus can be used toward any subscription plan!
                 </p>
                 <button
                   type="button"
@@ -499,6 +519,24 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
             ) : (
               <form onSubmit={handleSignupSubmit} className="space-y-3.5">
+                {/* $10 Bonus Credit Announcement Banner */}
+                <div className="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-teal-500/15 to-cyan-500/10 border border-emerald-500/40 flex items-start gap-3 shadow-lg shadow-emerald-950/30">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500/25 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                    <Gift className="w-5 h-5 animate-pulse" />
+                  </div>
+                  <div className="space-y-0.5">
+                    <div className="text-xs font-bold text-white flex items-center gap-1.5 flex-wrap">
+                      <span>Get $10.00 Signup Bonus Credit</span>
+                      <span className="px-1.5 py-0.2 rounded text-[9px] font-mono bg-emerald-500 text-slate-950 font-black uppercase">
+                        INSTANT BONUS
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 leading-snug">
+                      Create an account today and instantly receive <strong>$10.00 in free credit</strong> to apply towards any SMTP tier (Basic, Advance, Pro) or relay testing.
+                    </p>
+                  </div>
+                </div>
+
                 {signupError && (
                   <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0" />

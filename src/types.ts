@@ -193,6 +193,7 @@ export type ActiveNav =
   | 'ai-tools'
   | 'ai_tools'
   | 'admin'
+  | 'billing'
   | 'settings'
   | 'guides';
 
@@ -212,6 +213,23 @@ export interface AppUser {
   passwordResetRequested?: boolean;
   passwordResetRequestDate?: string;
   notes?: string;
+  creditBalance?: number;
+  selectedPlanId?: string;
+}
+
+export interface PlanTier {
+  id: string;
+  name: string;
+  price: number;
+  period: string;
+  emailsPerDay: string;
+  dailyCapacity: number;
+  monthlyCapacity: string;
+  smtpDescription: string;
+  supportedRelays: string[];
+  features: string[];
+  popular?: boolean;
+  badge?: string;
 }
 
 export interface AdminNotification {

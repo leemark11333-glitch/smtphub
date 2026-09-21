@@ -15,7 +15,9 @@ import {
   KeyRound,
   LogOut,
   Clock,
-  Sparkles
+  Sparkles,
+  CreditCard,
+  Gift
 } from 'lucide-react';
 import { ActiveNav, SmtpAccount, LiveEmailEvent, AppUser } from '../types';
 import { checkUserAccessValidity } from '../utils/authUtils';
@@ -84,6 +86,8 @@ export const Header: React.FC<HeaderProps> = ({
         return 'AI Intelligence Suite';
       case 'admin':
         return 'Master Admin Portal & Access Allocation';
+      case 'billing':
+        return 'Subscription Plans & Relay Billing';
       case 'settings':
         return 'Workspace & Relay Settings';
       case 'guides':
@@ -149,6 +153,22 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Master Admin</span>
           </button>
         )}
+
+        {/* Plans & Pricing Quick Button */}
+        <button
+          onClick={() => setActiveNav('billing')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            activeNav === 'billing'
+              ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-md shadow-emerald-500/20'
+              : 'bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/[0.08]'
+          }`}
+        >
+          <CreditCard className="w-3.5 h-3.5 text-cyan-400" />
+          <span className="hidden sm:inline">Plans</span>
+          <span className="px-1.5 py-0.2 rounded text-[9px] font-mono bg-amber-400/20 text-amber-300 border border-amber-400/30">
+            +$10
+          </span>
+        </button>
 
         {/* Live Cluster Indicator */}
         <div
@@ -299,6 +319,22 @@ export const Header: React.FC<HeaderProps> = ({
                     <span>Master Admin Portal</span>
                   </button>
                 )}
+
+                <button
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    setActiveNav('billing');
+                  }}
+                  className="w-full text-left px-3 py-2 text-xs text-slate-200 hover:bg-white/[0.06] rounded-lg transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-4 h-4 text-cyan-400" />
+                    <span>Plans & Billing</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">
+                    ${currentUser?.creditBalance ?? 10} credit
+                  </span>
+                </button>
 
                 {onOpenAuthModal && (
                   <button

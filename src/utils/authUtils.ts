@@ -31,12 +31,13 @@ export const INITIAL_USERS: AppUser[] = [
     role: 'user',
     status: 'approved',
     accessDays: 30,
+    creditBalance: 10,
     createdAt: '2026-09-12T09:30:00.000Z',
     approvedAt: '2026-09-12T09:35:00.000Z',
     // 30 days from Sept 12 = Oct 12 (~21 days remaining)
     expiresAt: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString(),
     lastLoginAt: '2026-09-21T09:15:00.000Z',
-    notes: 'Assigned 30 days trial access for outbound tests',
+    notes: 'Assigned 30 days trial access for outbound tests. Received $10 signup credit.',
   },
   {
     id: 'user-client-sarah',
@@ -46,8 +47,9 @@ export const INITIAL_USERS: AppUser[] = [
     role: 'user',
     status: 'pending',
     accessDays: 0,
+    creditBalance: 10,
     createdAt: '2026-09-21T10:45:00.000Z',
-    notes: 'Self-registered via signup form. Needs approval & day allocation.',
+    notes: 'Self-registered via signup form. Needs approval & day allocation. Received $10 signup bonus credit.',
   },
   {
     id: 'user-client-david',
@@ -57,6 +59,7 @@ export const INITIAL_USERS: AppUser[] = [
     role: 'user',
     status: 'approved',
     accessDays: 7,
+    creditBalance: 10,
     createdAt: '2026-09-01T08:00:00.000Z',
     approvedAt: '2026-09-01T08:05:00.000Z',
     // Expired 5 days ago
@@ -64,7 +67,7 @@ export const INITIAL_USERS: AppUser[] = [
     lastLoginAt: '2026-09-07T14:20:00.000Z',
     passwordResetRequested: true,
     passwordResetRequestDate: '2026-09-21T11:10:00.000Z',
-    notes: 'Access expired after 7 days trial. Also requested password reset.',
+    notes: 'Access expired after 7 days trial. License reached zero. Needs extension.',
   },
 ];
 
@@ -251,6 +254,11 @@ export function saveStoredNotifications(notifs: AdminNotification[]): void {
 
 export function loadStoredCurrentUser(): AppUser | null {
   try {
+    const isSessionActive = sessionStorage.getItem('smtphub_auth_active');
+    if (!isSessionActive) {
+      // On starting, show login page to authenticate
+      return null;
+    }
     const stored = localStorage.getItem(CURRENT_USER_STORAGE_KEY);
     if (stored) {
       return JSON.parse(stored);
@@ -258,15 +266,16 @@ export function loadStoredCurrentUser(): AppUser | null {
   } catch (e) {
     console.error('Failed to load current user', e);
   }
-  // Default to Master Admin for easy demonstration
-  return INITIAL_USERS[0];
+  return null;
 }
 
 export function saveStoredCurrentUser(user: AppUser | null): void {
   try {
     if (user) {
+      sessionStorage.setItem('smtphub_auth_active', 'true');
       localStorage.setItem(CURRENT_USER_STORAGE_KEY, JSON.stringify(user));
     } else {
+      sessionStorage.removeItem('smtphub_auth_active');
       localStorage.removeItem(CURRENT_USER_STORAGE_KEY);
     }
   } catch (e) {

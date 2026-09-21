@@ -63,6 +63,7 @@ import { SequencesView } from './components/SequencesView';
 import { SettingsView } from './components/SettingsView';
 import { GuidesView } from './components/GuidesView';
 import { MasterAdminView } from './components/MasterAdminView';
+import { BillingPlansView } from './components/BillingPlansView';
 
 export default function App() {
   const [activeNav, setActiveNav] = useState<ActiveNav>('dashboard');
@@ -71,7 +72,8 @@ export default function App() {
   const [users, setUsers] = useState<AppUser[]>(() => loadStoredUsers());
   const [notifications, setNotifications] = useState<AdminNotification[]>(() => loadStoredNotifications());
   const [currentUser, setCurrentUser] = useState<AppUser | null>(() => loadStoredCurrentUser());
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  // On starting show login page if not authenticated
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(() => !loadStoredCurrentUser());
   const [authModalTab, setAuthModalTab] = useState<'login' | 'signup'>('login');
   const [adminToast, setAdminToast] = useState<{ title: string; desc: string } | null>(null);
 
@@ -500,6 +502,7 @@ export default function App() {
               liveEvents={liveEvents}
               setActiveNav={setActiveNav}
               onOpenTestModal={() => handleOpenTestModal()}
+              currentUser={currentUser}
             />
           )}
 
@@ -625,6 +628,16 @@ export default function App() {
           {activeNav === 'guides' && (
             <GuidesView setActiveNav={setActiveNav} />
           )}
+
+          {activeNav === 'billing' && (
+            <BillingPlansView
+              currentUser={currentUser}
+              onOpenAuth={() => {
+                setAuthModalTab('login');
+                setIsAuthModalOpen(true);
+              }}
+            />
+          )}
         </main>
       </div>
 
@@ -646,7 +659,12 @@ export default function App() {
 
       <AuthModal
         isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={() => {
+          if (currentUser) {
+            setIsAuthModalOpen(false);
+          }
+        }}
+        isMandatory={!currentUser}
         users={users}
         initialTab={authModalTab}
         onLoginSuccess={(user) => {

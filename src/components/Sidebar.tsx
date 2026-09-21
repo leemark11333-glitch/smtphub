@@ -24,7 +24,9 @@ import {
   Plus,
   Lock,
   User,
-  LogOut
+  LogOut,
+  CreditCard,
+  Gift
 } from 'lucide-react';
 import { ActiveNav, SmtpAccount, AppUser } from '../types';
 import { checkUserAccessValidity } from '../utils/authUtils';
@@ -58,15 +60,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside className="w-64 bg-[#0d1017] border-r border-white/[0.08] flex flex-col h-screen select-none shrink-0 overflow-y-auto">
-      {/* Brand Header */}
-      <div className="p-4 border-b border-white/[0.08] flex items-center justify-between">
+      {/* Brand Header - Click on index shows login page to authenticate */}
+      <div
+        onClick={() => {
+          if (onOpenAuthModal) onOpenAuthModal();
+        }}
+        title="Click index / logo to authenticate or switch user"
+        className="p-4 border-b border-white/[0.08] flex items-center justify-between cursor-pointer hover:bg-white/[0.04] transition-colors group"
+      >
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/20 font-black text-lg">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/20 font-black text-lg group-hover:scale-105 transition-transform">
             <Radio className="w-5 h-5 text-slate-950 stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base tracking-tight text-white">SMTPHUB</span>
+              <span className="font-extrabold text-base tracking-tight text-white group-hover:text-emerald-400 transition-colors">SMTPHUB</span>
               <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 tracking-wider font-mono">
                 PRO
               </span>
@@ -74,6 +82,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <p className="text-[10px] text-slate-400 font-mono tracking-wide">Multi-Relay Engine</p>
           </div>
         </div>
+        <span className="text-[9px] font-mono text-slate-400 group-hover:text-emerald-300 border border-white/[0.1] px-1.5 py-0.5 rounded bg-white/[0.03] transition-colors">
+          Auth
+        </span>
       </div>
 
       {/* Master Admin Quick Notice if Admin */}
@@ -225,6 +236,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <BarChart3 className="w-4 h-4 text-amber-400" />
                 <span>Analytics</span>
               </div>
+            </button>
+
+            {/* BILLING & PLANS NAVIGATION ITEM */}
+            <button
+              onClick={() => setActiveNav('billing')}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+                activeNav === 'billing'
+                  ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                  : 'text-slate-300 hover:bg-white/[0.04] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <CreditCard className="w-4 h-4 text-cyan-400" />
+                <span>Plans & Billing</span>
+              </div>
+              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 font-mono">
+                $10 Bonus
+              </span>
             </button>
           </div>
         </div>
@@ -490,6 +519,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
             >
               {validity.badgeLabel}
+            </span>
+          </div>
+        )}
+
+        {/* Bonus Credit Display */}
+        {currentUser && (
+          <div
+            onClick={() => setActiveNav('billing')}
+            className="mt-1.5 flex items-center justify-between text-[10px] font-mono p-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/15 border border-emerald-500/20 cursor-pointer transition-colors"
+          >
+            <span className="text-emerald-300 flex items-center gap-1 font-semibold">
+              <Gift className="w-3 h-3 text-emerald-400" />
+              Bonus Credit:
+            </span>
+            <span className="text-emerald-400 font-bold">
+              ${currentUser.creditBalance ?? 10}.00
             </span>
           </div>
         )}
