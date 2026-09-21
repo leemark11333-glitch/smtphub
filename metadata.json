@@ -1,0 +1,6 @@
+{
+  "name": "SMTPDock - Bulk Email & SMTP Automation Platform",
+  "description": "Bulk email marketing, multi-SMTP load balancing, deliverability monitoring, warmup automation, master admin access control with day validity validation, and campaign analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
